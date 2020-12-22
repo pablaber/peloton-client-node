@@ -1,6 +1,6 @@
 {
   "name": "peloton-client-node",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Client for using the peloton API in Node",
   "main": "dist/index.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "node"
   ],
   "author": "Patrick Bacon-Blaber",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/pablaber/peloton-client-node/issues"
   },
