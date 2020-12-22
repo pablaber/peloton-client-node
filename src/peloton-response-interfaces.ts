@@ -130,6 +130,17 @@ export interface QuickHits {
   incline_shortcuts?: any
 }
 
+export interface Relationship {
+  me_to_user: String,
+  user_to_me: String,
+}
+
+export interface Streaks {
+  current_weekly: Number,
+  best_weekly: Number,
+  start_date_of_current_weekly: Number,
+}
+
 export interface WorkoutsResponse {
   count: Number,
   data: Workout[],
@@ -206,5 +217,26 @@ export interface MeResponse {
   username: String,
   v1_referrals_made: Number,
   weight: Number,
+  workout_counts: WorkoutCountObject[],
+}
+
+export interface UserResponse {
+  authed_user_follows: Boolean,
+  block_explicit: Boolean,
+  created_at: Number,
+  id: String,
+  image_url: String,
+  is_profile_private: Boolean,
+  is_provisional: Boolean,
+  last_workout_at?: any,
+  location: String,
+  relationship: Relationship,
+  streaks: Streaks,
+  total_followers: Number,
+  total_following: Number,
+  total_non_pedaling_metric_workouts: Number,
+  total_pedaling_metric_workouts: Number,
+  total_workouts: Number,
+  username: String,
   workout_counts: WorkoutCountObject[],
 }

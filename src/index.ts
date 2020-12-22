@@ -3,6 +3,7 @@ const querystring = require('querystring');
 import request from './request';
 import {
   MeResponse,
+  UserResponse,
   WorkoutsResponse,
 } from './peloton-response-interfaces';
 
@@ -78,6 +79,25 @@ async function me(): Promise<MeResponse> {
   return meRes.data;
 }
 
+interface UserOptions {
+  userId?: String
+}
+
+/**
+ * Get the details of a user specified by a given ID
+ * @param {UserOptions} options - user options
+ * @return {Promise<UserResponse | MeResponse>} the limited user information if a userId is
+ * specified, or your full options if none specified or your own user ID specified
+ */
+async function user(options: UserOptions = {}): Promise<UserResponse | MeResponse> {
+  _verifyIsLoggedIn();
+  const userId = options.userId || clientVariables.userId;
+  const userRes = await request.get(_pelotonApiUrlFor(`/user/${userId}`), {
+    cookie: clientVariables.cookie,
+  });
+  return userRes.data;
+}
+
 interface WorkoutsOptions {
   joins?: String
   limit?: Number
@@ -106,5 +126,6 @@ async function workouts(options: WorkoutsOptions = {}): Promise<WorkoutsResponse
 export const peloton = {
   authenticate,
   me,
+  user,
   workouts,
 };

@@ -1,13 +1,14 @@
 {
   "name": "peloton-client-node",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Client for using the peloton API in Node",
   "main": "dist/index.js",
   "scripts": {
     "run": "node dist/index.js",
     "test": "echo hi",
     "lint": "eslint .",
-    "build": "tsc"
+    "build": "tsc",
+    "publish": "npm publish"
   },
   "repository": {
     "type": "git",
