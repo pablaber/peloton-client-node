@@ -28,7 +28,9 @@ example();
 
 ## Documenation
 
-- [peloton.authenticate(options)](#pelotonauthenticateoptions) - authenticate the session
+- [`peloton.authenticate(options)`](#pelotonauthenticateoptions) - authenticate the session
+- [`peloton.me()`](#pelotonme) - get authenticated user info
+- [`peloton.workouts(options)`](#pelotonworkoutoptions) - get workouts of authetnicated user
 
 ### `peloton.authenticate(options)`
 
