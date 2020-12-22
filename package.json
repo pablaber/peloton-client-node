@@ -1,0 +1,25 @@
+{
+  "name": "peloton-client-node",
+  "version": "1.0.0",
+  "description": "Client for using the peloton API in Node",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pablaber/peloton-client-node.git"
+  },
+  "keywords": [
+    "peloton",
+    "api",
+    "client",
+    "node"
+  ],
+  "author": "Patrick Bacon-Blaber",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pablaber/peloton-client-node/issues"
+  },
+  "homepage": "https://github.com/pablaber/peloton-client-node#readme"
+}
