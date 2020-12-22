@@ -18,7 +18,7 @@ interface RequestResponse {
  * @param {String} url - the URL to get
  * @return {Object} the result of the get request
  */
-function get(url: String, headers: Object): Promise<Object> {
+function get(url: String, headers: Object): Promise<RequestResponse> {
   return new Promise((resolve, reject) => {
     const parsedUrl = urlLib.parse(url);
     const options = {
@@ -30,6 +30,10 @@ function get(url: String, headers: Object): Promise<Object> {
 
     https
       .request(options, (res: HttpResponse) => {
+        const response = {
+          status: res.statusCode,
+          headers: res.headers,
+        };
         let data = '';
 
         res.on('data', (d: String) => {
@@ -39,9 +43,15 @@ function get(url: String, headers: Object): Promise<Object> {
         res.on('end', () => {
           try {
             const jsonData = JSON.parse(data);
-            return resolve(jsonData);
+            return resolve({
+              ...response,
+              data: jsonData,
+            });
           } catch {
-            return resolve(data);
+            return resolve({
+              ...response,
+              data,
+            });
           }
         });
       })

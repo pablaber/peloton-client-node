@@ -42,12 +42,23 @@ var request_1 = require("./request");
 var clientVariables = {
     loggedIn: false
 };
+function _pelotonApiUrlFor(forPath) {
+    return "https://api.onepeloton.com/api" + forPath;
+}
+function _pelotonAuthUrlFor(forPath) {
+    return "https://api.onepeloton.com/auth" + forPath;
+}
+function _verifyIsLoggedIn() {
+    if (!clientVariables.loggedIn) {
+        throw new Error('Must authenticate before making API call.');
+    }
+}
 function authenticate(options) {
     return __awaiter(this, void 0, void 0, function () {
         var loginRes;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4, request_1["default"].post('https://api.onepeloton.com/auth/login', {
+                case 0: return [4, request_1["default"].post(_pelotonAuthUrlFor('/login'), {
                         username_or_email: options.username,
                         password: options.password
                     })];
@@ -68,12 +79,12 @@ function me() {
             switch (_a.label) {
                 case 0:
                     _verifyIsLoggedIn();
-                    return [4, request_1["default"].get('https://api.onepeloton.com/api/me', {
+                    return [4, request_1["default"].get(_pelotonApiUrlFor('/me'), {
                             cookie: clientVariables.cookie
                         })];
                 case 1:
                     meRes = _a.sent();
-                    return [2, meRes];
+                    return [2, meRes.data];
             }
         });
     });
@@ -86,25 +97,20 @@ function workouts(options) {
             switch (_a.label) {
                 case 0:
                     _verifyIsLoggedIn();
-                    userId = options.userId || clientVariables.userId;
+                    userId = clientVariables.userId;
                     joins = options.joins || 'ride';
                     limit = options.limit || 10;
                     page = options.page || 0;
                     workoutQueryParams = querystring.stringify({ joins: joins, limit: limit, page: page });
-                    return [4, request_1["default"].get("https://api.onepeloton.com/api/user/" + userId + "/workouts?" + workoutQueryParams, {
+                    return [4, request_1["default"].get(_pelotonApiUrlFor("/user/" + userId + "/workouts?" + workoutQueryParams), {
                             cookie: clientVariables.cookie
                         })];
                 case 1:
                     workoutRes = _a.sent();
-                    return [2, workoutRes];
+                    return [2, workoutRes.data];
             }
         });
     });
-}
-function _verifyIsLoggedIn() {
-    if (!clientVariables.loggedIn) {
-        throw new Error('Must authenticate before making API call.');
-    }
 }
 exports.peloton = {
     authenticate: authenticate,

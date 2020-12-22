@@ -24,6 +24,10 @@ function get(url, headers) {
         };
         https
             .request(options, function (res) {
+            var response = {
+                status: res.statusCode,
+                headers: res.headers
+            };
             var data = '';
             res.on('data', function (d) {
                 data += d;
@@ -31,10 +35,10 @@ function get(url, headers) {
             res.on('end', function () {
                 try {
                     var jsonData = JSON.parse(data);
-                    return resolve(jsonData);
+                    return resolve(__assign(__assign({}, response), { data: jsonData }));
                 }
                 catch (_a) {
-                    return resolve(data);
+                    return resolve(__assign(__assign({}, response), { data: data }));
                 }
             });
         })

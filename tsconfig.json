@@ -5,6 +5,7 @@
     "removeComments": true,
     "sourceMap": true,
     "watch": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "declaration": true
   },
 }
