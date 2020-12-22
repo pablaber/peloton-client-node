@@ -1,6 +1,6 @@
 {
   "name": "peloton-client-node",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Client for using the peloton API in Node",
   "main": "dist/index.js",
   "scripts": {
