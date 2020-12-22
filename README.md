@@ -28,6 +28,7 @@ async function example() {
 
 - [`peloton.authenticate(options)`](#pelotonauthenticateoptions) - authenticate the session
 - [`peloton.me()`](#pelotonme) - get authenticated user info
+- [`peloton.user(options)`](#pelotonuseroptions) - get user info for specific user
 - [`peloton.workouts(options)`](#pelotonworkoutoptions) - get workouts of authetnicated user
 
 ### `peloton.authenticate(options)`
