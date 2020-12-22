@@ -28,6 +28,8 @@ example();
 
 ## Documenation
 
+- [peloton.authenticate(options)](#pelotonauthenticateoptions) - authenticate the session
+
 ### `peloton.authenticate(options)`
 
 #### Description
