@@ -3,7 +3,8 @@
     "module": "CommonJS",
     "noImplicitAny": true,
     "removeComments": true,
-    "target": "ES6",
-    "sourceMap": true
-  }
+    "sourceMap": true,
+    "watch": true,
+    "outDir": "dist"
+  },
 }
