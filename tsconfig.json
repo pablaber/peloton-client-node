@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
+    "module": "CommonJS",
     "noImplicitAny": true,
-    "target": "ES5",
-    "module": "ES2015"
+    "removeComments": true,
+    "target": "ES6",
+    "sourceMap": true
   }
 }
