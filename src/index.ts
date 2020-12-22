@@ -99,9 +99,10 @@ async function user(options: UserOptions = {}): Promise<UserResponse | MeRespons
 }
 
 interface WorkoutsOptions {
-  joins?: String
-  limit?: Number
-  page?: Number
+  userId?: String,
+  limit?: Number,
+  page?: Number,
+  joins?: String,
 }
 
 /**
@@ -111,7 +112,7 @@ interface WorkoutsOptions {
  */
 async function workouts(options: WorkoutsOptions = {}): Promise<WorkoutsResponse> {
   _verifyIsLoggedIn();
-  const { userId } = clientVariables;
+  const userId = options.userId || clientVariables.userId;
   const joins = options.joins || 'ride';
   const limit = options.limit || 10;
   const page = options.page || 0;

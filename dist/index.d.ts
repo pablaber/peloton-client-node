@@ -10,9 +10,10 @@ interface UserOptions {
 }
 declare function user(options?: UserOptions): Promise<UserResponse | MeResponse>;
 interface WorkoutsOptions {
-    joins?: String;
+    userId?: String;
     limit?: Number;
     page?: Number;
+    joins?: String;
 }
 declare function workouts(options?: WorkoutsOptions): Promise<WorkoutsResponse>;
 export declare const peloton: {

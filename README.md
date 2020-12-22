@@ -77,10 +77,11 @@ const userInfo = await peloton.user({ userId: 'some-user-id' });
 ### `peloton.workouts(options)`
 
 #### Description
-Gets the workouts of the authenticated user.
+Gets the workouts of the authenticated user or a specified user.
 
 #### Arguments
 - `options` - options object
+  - `userId` - specify the user to retrieve the workouts of (default: authenticated userId)
   - `limit` - limit the number of workouts returned (default: `10`)
   - `page` - the page of the results to fetch (default: `0`)
   - `joins` - _UNSURE:_ some sort of join key. I believe it may expand the keys provided (default: `'ride'`)

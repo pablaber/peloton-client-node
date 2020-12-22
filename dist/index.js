@@ -116,7 +116,7 @@ function workouts(options) {
             switch (_a.label) {
                 case 0:
                     _verifyIsLoggedIn();
-                    userId = clientVariables.userId;
+                    userId = options.userId || clientVariables.userId;
                     joins = options.joins || 'ride';
                     limit = options.limit || 10;
                     page = options.page || 0;
