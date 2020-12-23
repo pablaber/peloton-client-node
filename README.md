@@ -91,7 +91,7 @@ Get the followers of the authenticated user or a specified user.
 
 #### Usage
 ```js
-const followers = await peloton.getFollowers({
+const followers = await peloton.followers({
   userId: 'some-peloton-user-id',
   limit: 100,
   page: 0,
@@ -111,7 +111,7 @@ Get the users following the authenticated user or a specified user.
 
 #### Usage
 ```js
-const following = await peloton.getFollowing({
+const following = await peloton.following({
   userId: 'some-peloton-user-id',
   limit: 100,
   page: 0,
