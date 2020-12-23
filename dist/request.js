@@ -11,8 +11,8 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 exports.__esModule = true;
-var https = require('https');
-var urlLib = require('url');
+var https = require("https");
+var urlLib = require("url");
 function get(url, headers) {
     return new Promise(function (resolve, reject) {
         var parsedUrl = urlLib.parse(url);
@@ -33,13 +33,8 @@ function get(url, headers) {
                 data += d;
             });
             res.on('end', function () {
-                try {
-                    var jsonData = JSON.parse(data);
-                    return resolve(__assign(__assign({}, response), { data: jsonData }));
-                }
-                catch (_a) {
-                    return resolve(__assign(__assign({}, response), { data: data }));
-                }
+                var jsonData = JSON.parse(data);
+                resolve(__assign(__assign({}, response), { data: jsonData }));
             });
         })
             .on('error', reject)
@@ -70,13 +65,8 @@ function post(url, body) {
                 data += d;
             });
             res.on('end', function () {
-                try {
-                    var jsonData = JSON.parse(data);
-                    return resolve(__assign(__assign({}, response), { data: jsonData }));
-                }
-                catch (_a) {
-                    return resolve(__assign(__assign({}, response), { data: data }));
-                }
+                var jsonData = JSON.parse(data);
+                return resolve(__assign(__assign({}, response), { data: jsonData }));
             });
         })
             .on('error', reject)

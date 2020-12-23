@@ -6,7 +6,7 @@
   "scripts": {
     "run": "node dist/index.js",
     "test": "echo hi",
-    "lint": "eslint .",
+    "lint": "eslint . --ext ts",
     "build": "tsc"
   },
   "repository": {
@@ -27,6 +27,9 @@
   "homepage": "https://github.com/pablaber/peloton-client-node#readme",
   "dependencies": {},
   "devDependencies": {
+    "@types/node": "^14.14.14",
+    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/parser": "^4.11.0",
     "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.1",

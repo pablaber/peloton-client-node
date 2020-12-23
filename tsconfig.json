@@ -6,6 +6,9 @@
     "sourceMap": true,
     "watch": true,
     "outDir": "dist",
-    "declaration": true
+    "declaration": true,
+    "lib": [
+      "ES2015"
+    ]
   },
 }

@@ -1,4 +1,4 @@
-const querystring = require('querystring');
+import querystring = require('querystring');
 
 import request from './request';
 import {
@@ -6,15 +6,16 @@ import {
   MeResponse,
   UserResponse,
   WorkoutsResponse,
+  WorkoutResponse,
 } from './peloton-response-interfaces';
 
 /**
  * The client variables which are stored to maintain a "session" when making requests.
  */
 interface ClientVariables {
-  loggedIn: Boolean,
-  cookie?: Array<String>
-  userId?: String
+  loggedIn: boolean,
+  cookie?: Array<string>
+  userId?: string
 }
 
 const clientVariables: ClientVariables = {
@@ -23,19 +24,19 @@ const clientVariables: ClientVariables = {
 
 /**
  * Returns the peloton API url for the given path
- * @param {String} forPath - the path to return the ULR for
- * @return {String} the full API url for the given path
+ * @param {string} forPath - the path to return the ULR for
+ * @return {string} the full API url for the given path
  */
-function _pelotonApiUrlFor(forPath: String): String {
+function _pelotonApiUrlFor(forPath: string): string {
   return `https://api.onepeloton.com/api${forPath}`;
 }
 
 /**
  * Returns the peloton auth URL for the given path
- * @param {String} forPath - the path to return the ULR for
- * @return {String} the full API url for the given path
+ * @param {string} forPath - the path to return the ULR for
+ * @return {string} the full API url for the given path
  */
-function _pelotonAuthUrlFor(forPath: String): String {
+function _pelotonAuthUrlFor(forPath: string): string {
   return `https://api.onepeloton.com/auth${forPath}`;
 }
 
@@ -81,7 +82,7 @@ async function me(): Promise<MeResponse> {
 }
 
 interface UserOptions {
-  userId?: String
+  userId?: string
 }
 
 /**
@@ -100,9 +101,9 @@ async function user(options: UserOptions = {}): Promise<UserResponse | MeRespons
 }
 
 interface FollowerFollowingOptions {
-  userId?: String,
-  limit?: Number,
-  page?: Number
+  userId?: string,
+  limit?: number,
+  page?: number
 }
 
 /**
@@ -141,10 +142,10 @@ async function following(options: FollowerFollowingOptions): Promise<FollowerFol
 }
 
 interface WorkoutsOptions {
-  userId?: String,
-  limit?: Number,
-  page?: Number,
-  joins?: String,
+  userId?: string,
+  limit?: number,
+  page?: number,
+  joins?: string,
 }
 
 /**
@@ -160,7 +161,25 @@ async function workouts(options: WorkoutsOptions = {}): Promise<WorkoutsResponse
   const page = options.page || 0;
 
   const workoutQueryParams = querystring.stringify({ joins, limit, page });
-  const workoutRes = await request.get(_pelotonApiUrlFor(`/user/${userId}/workouts?${workoutQueryParams}`), {
+  const workoutsRes = await request.get(_pelotonApiUrlFor(`/user/${userId}/workouts?${workoutQueryParams}`), {
+    cookie: clientVariables.cookie,
+  });
+  return workoutsRes.data;
+}
+
+interface WorkoutOptions {
+  workoutId: string,
+}
+
+/**
+ * Fetch information from a specific workout
+ * @param {WorkoutOptions} options - request options
+ * @return {Promise<WorkoutResponse>} the specified workout details
+ */
+async function workout(options: WorkoutOptions): Promise<WorkoutResponse> {
+  const { workoutId } = options;
+
+  const workoutRes = await request.get(_pelotonApiUrlFor(`/workout/${workoutId}`), {
     cookie: clientVariables.cookie,
   });
   return workoutRes.data;
@@ -173,4 +192,5 @@ export const peloton = {
   followers,
   following,
   workouts,
+  workout,
 };

@@ -1,36 +1,13 @@
 module.exports = {
-  parserOptions: {
-    allowImportExportEverywhere: true,
-  },
-  extends: [
-    'airbnb-base',
-  ],
   env: {
     node: true,
-    mocha: true,
   },
-  rules: {
-    'class-methods-use-this': 'off',
-    'consistent-return': 'error',
-    'max-len': 'off',
-    'prefer-destructuring': [
-      'error',
-      {
-        array: false,
-        object: true,
-      },
-    ],
-    'no-console': 'warn',
-    'no-underscore-dangle': 'off',
-    'no-use-before-define': [
-      'error',
-      {
-        functions: false,
-        classes: true,
-        variables: true,
-      },
-    ],
-    'no-useless-constructor': 'off',
-    'import/prefer-default-export': 'off',
-  }
-};
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: 'es2015', // Allows for the parsing of modern ECMAScript features
+    sourceType: "module" // Allows for the use of imports
+  },
+  extends: [
+    "plugin:@typescript-eslint/recommended" // Uses the recommended rules from the @typescript-eslint/eslint-plugin
+  ],
+}

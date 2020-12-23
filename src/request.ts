@@ -1,16 +1,11 @@
-const https = require('https');
-const urlLib = require('url');
-
-interface HttpResponse {
-  on: Function
-  headers: Object,
-  statusCode: Number,
-}
+import { IncomingHttpHeaders, IncomingMessage } from 'http';
+import https = require('https');
+import urlLib = require('url');
 
 interface RequestResponse {
-  headers: any,
-  status: Number,
-  data: any
+  headers: IncomingHttpHeaders
+  status: number
+  data: any,
 }
 
 /**
@@ -18,7 +13,7 @@ interface RequestResponse {
  * @param {String} url - the URL to get
  * @return {Object} the result of the get request
  */
-function get(url: String, headers: Object): Promise<RequestResponse> {
+function get(url: string, headers: Record<string, string | string[]>): Promise<RequestResponse> {
   return new Promise((resolve, reject) => {
     const parsedUrl = urlLib.parse(url);
     const options = {
@@ -29,30 +24,23 @@ function get(url: String, headers: Object): Promise<RequestResponse> {
     };
 
     https
-      .request(options, (res: HttpResponse) => {
+      .request(options, (res: IncomingMessage) => {
         const response = {
           status: res.statusCode,
           headers: res.headers,
         };
         let data = '';
 
-        res.on('data', (d: String) => {
+        res.on('data', (d: string) => {
           data += d;
         });
 
         res.on('end', () => {
-          try {
-            const jsonData = JSON.parse(data);
-            return resolve({
-              ...response,
-              data: jsonData,
-            });
-          } catch {
-            return resolve({
-              ...response,
-              data,
-            });
-          }
+          const jsonData = JSON.parse(data);
+          resolve({
+            ...response,
+            data: jsonData,
+          });
         });
       })
       .on('error', reject)
@@ -60,7 +48,7 @@ function get(url: String, headers: Object): Promise<RequestResponse> {
   })
 }
 
-function post(url: String, body: Object): Promise<RequestResponse> {
+function post(url: string, body: Record<string, unknown>): Promise<RequestResponse> {
   return new Promise((resolve, reject) => {
     const parsedUrl = urlLib.parse(url);
     const stringBody = JSON.stringify(body);
@@ -76,30 +64,23 @@ function post(url: String, body: Object): Promise<RequestResponse> {
 
 
     https
-      .request(options, (res: HttpResponse) => {
+      .request(options, (res: IncomingMessage) => {
         const response = {
           status: res.statusCode,
           headers: res.headers,
         }
         let data = '';
 
-        res.on('data', (d: String) => {
+        res.on('data', (d: string) => {
           data += d;
         });
 
         res.on('end', () => {
-          try {
-            const jsonData = JSON.parse(data);
-            return resolve({
-              ...response,
-              data: jsonData,
-            });
-          } catch {
-            return resolve({
-              ...response,
-              data,
-            });
-          }
+          const jsonData = JSON.parse(data);
+          return resolve({
+            ...response,
+            data: jsonData,
+          });
         });
       })
       .on('error', reject)

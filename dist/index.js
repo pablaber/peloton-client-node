@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.peloton = void 0;
-var querystring = require('querystring');
+var querystring = require("querystring");
 var request_1 = require("./request");
 var clientVariables = {
     loggedIn: false
@@ -151,7 +151,7 @@ function following(options) {
 function workouts(options) {
     if (options === void 0) { options = {}; }
     return __awaiter(this, void 0, void 0, function () {
-        var userId, joins, limit, page, workoutQueryParams, workoutRes;
+        var userId, joins, limit, page, workoutQueryParams, workoutsRes;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -162,6 +162,23 @@ function workouts(options) {
                     page = options.page || 0;
                     workoutQueryParams = querystring.stringify({ joins: joins, limit: limit, page: page });
                     return [4, request_1["default"].get(_pelotonApiUrlFor("/user/" + userId + "/workouts?" + workoutQueryParams), {
+                            cookie: clientVariables.cookie
+                        })];
+                case 1:
+                    workoutsRes = _a.sent();
+                    return [2, workoutsRes.data];
+            }
+        });
+    });
+}
+function workout(options) {
+    return __awaiter(this, void 0, void 0, function () {
+        var workoutId, workoutRes;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    workoutId = options.workoutId;
+                    return [4, request_1["default"].get(_pelotonApiUrlFor("/workout/" + workoutId), {
                             cookie: clientVariables.cookie
                         })];
                 case 1:
@@ -177,6 +194,7 @@ exports.peloton = {
     user: user,
     followers: followers,
     following: following,
-    workouts: workouts
+    workouts: workouts,
+    workout: workout
 };
 //# sourceMappingURL=index.js.map

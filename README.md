@@ -33,7 +33,8 @@ async function example() {
 - [`peloton.user(options)`](#pelotonuseroptions) - get user info for specific user
 - [`peloton.followers(options)`](#pelotonfollowersoptions) - the get followers of a specified user
 - [`peloton.following(options)`](#pelotonfollowingoptions) - the get users following of a specified user
-- [`peloton.workouts(options)`](#pelotonworkoutoptions) - get workouts of authetnicated user
+- [`peloton.workouts(options)`](#pelotonworkoutsoptions) - get workouts of authetnicated user
+- [`peloton.workout(options)`](#pelotonworkoutoptions) - get details of a specific workout
 
 ### `peloton.authenticate(options)`
 
@@ -137,6 +138,20 @@ const workoutsRes = await peloton.workouts({
   page: 0,
   joins: 'ride',
 });
+```
+
+### `peloton.workout(options)`
+
+#### Description
+Get the details of a specified workout
+
+#### Arguments
+- `options` - options object
+  - `workoutId` - the ID of the workout to retrieve
+  
+#### Usage
+```js
+const workoutRes = await peloton.workout({ workoutId: 'some-workout-id' });
 ```
 
 ## References
