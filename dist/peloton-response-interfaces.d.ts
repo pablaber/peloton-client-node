@@ -130,6 +130,19 @@ export interface Streaks {
     best_weekly: Number;
     start_date_of_current_weekly: Number;
 }
+export interface UserSmall {
+    authed_user_follows: false;
+    category: String;
+    id: String;
+    image_url: String;
+    is_profile_private: Boolean;
+    location: String;
+    relationship: Relationship[];
+    total_followers: Number;
+    total_following: Number;
+    total_workouts: Number;
+    username: String;
+}
 export interface WorkoutsResponse {
     count: Number;
     data: Workout[];
@@ -226,4 +239,15 @@ export interface UserResponse {
     total_workouts: Number;
     username: String;
     workout_counts: WorkoutCountObject[];
+}
+export interface FollowerFollowingResponse {
+    data: UserSmall[];
+    limit: Number;
+    page: Number;
+    total: Number;
+    count: Number;
+    page_count: Number;
+    show_previous: Boolean;
+    show_next: Boolean;
+    sort_by?: String;
 }

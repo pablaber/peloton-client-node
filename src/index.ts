@@ -2,6 +2,7 @@ const querystring = require('querystring');
 
 import request from './request';
 import {
+  FollowerFollowingResponse,
   MeResponse,
   UserResponse,
   WorkoutsResponse,
@@ -98,6 +99,47 @@ async function user(options: UserOptions = {}): Promise<UserResponse | MeRespons
   return userRes.data;
 }
 
+interface FollowerFollowingOptions {
+  userId?: String,
+  limit?: Number,
+  page?: Number
+}
+
+/**
+ * Returns a list of users who are followed by the specified userId (or authenticated userId if none
+ * specified)
+ * @param {FollowerFollowingOptions} options - the options to pass into the request
+ * @return {Promise<FollowerFollowingResponse>} the list of those being followed by the specified
+ * userId
+ */
+async function followers(options: FollowerFollowingOptions): Promise<FollowerFollowingResponse> {
+  const userId = options.userId || clientVariables.userId;
+  const limit = options.limit || 10;
+  const page = options.page || 0;
+  const workoutQueryParams = querystring.stringify({ limit, page });
+  const followersRes = await request.get(_pelotonApiUrlFor(`/user/${userId}/followers?${workoutQueryParams}`), {
+    cookie: clientVariables.cookie,
+  });
+  return followersRes.data;
+}
+
+/**
+ * Returns a list of users following the specified userId (or authenticated userId if none
+ * specified)
+ * @param {FollowerFollowingOptions} options - the options to pass into the request
+ * @return {Promise<FollowerFollowingResponse>} the list of those following the specified userId
+ */
+async function following(options: FollowerFollowingOptions): Promise<FollowerFollowingResponse> {
+  const userId = options.userId || clientVariables.userId;
+  const limit = options.limit || 10;
+  const page = options.page || 0;
+  const workoutQueryParams = querystring.stringify({ limit, page });
+  const followingRes = await request.get(_pelotonApiUrlFor(`/user/${userId}/following?${workoutQueryParams}`), {
+    cookie: clientVariables.cookie,
+  });
+  return followingRes.data;
+}
+
 interface WorkoutsOptions {
   userId?: String,
   limit?: Number,
@@ -128,5 +170,7 @@ export const peloton = {
   authenticate,
   me,
   user,
+  followers,
+  following,
   workouts,
 };

@@ -108,6 +108,46 @@ function user(options) {
         });
     });
 }
+function followers(options) {
+    return __awaiter(this, void 0, void 0, function () {
+        var userId, limit, page, workoutQueryParams, followersRes;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    userId = options.userId || clientVariables.userId;
+                    limit = options.limit || 10;
+                    page = options.page || 0;
+                    workoutQueryParams = querystring.stringify({ limit: limit, page: page });
+                    return [4, request_1["default"].get(_pelotonApiUrlFor("/user/" + userId + "/followers?" + workoutQueryParams), {
+                            cookie: clientVariables.cookie
+                        })];
+                case 1:
+                    followersRes = _a.sent();
+                    return [2, followersRes.data];
+            }
+        });
+    });
+}
+function following(options) {
+    return __awaiter(this, void 0, void 0, function () {
+        var userId, limit, page, workoutQueryParams, followingRes;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    userId = options.userId || clientVariables.userId;
+                    limit = options.limit || 10;
+                    page = options.page || 0;
+                    workoutQueryParams = querystring.stringify({ limit: limit, page: page });
+                    return [4, request_1["default"].get(_pelotonApiUrlFor("/user/" + userId + "/following?" + workoutQueryParams), {
+                            cookie: clientVariables.cookie
+                        })];
+                case 1:
+                    followingRes = _a.sent();
+                    return [2, followingRes.data];
+            }
+        });
+    });
+}
 function workouts(options) {
     if (options === void 0) { options = {}; }
     return __awaiter(this, void 0, void 0, function () {
@@ -135,6 +175,8 @@ exports.peloton = {
     authenticate: authenticate,
     me: me,
     user: user,
+    followers: followers,
+    following: following,
     workouts: workouts
 };
 //# sourceMappingURL=index.js.map

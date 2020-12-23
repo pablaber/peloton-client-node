@@ -7,8 +7,7 @@
     "run": "node dist/index.js",
     "test": "echo hi",
     "lint": "eslint .",
-    "build": "tsc",
-    "publish": "npm publish"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
