@@ -188,6 +188,25 @@ function workout(options) {
         });
     });
 }
+function workoutPerformanceGraph(options) {
+    return __awaiter(this, void 0, void 0, function () {
+        var workoutId, every_n, queryString, workoutPerformanceGraphRes;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    workoutId = options.workoutId;
+                    every_n = options.everyN || 5;
+                    queryString = querystring.stringify({ every_n: every_n });
+                    return [4, request_1["default"].get(_pelotonApiUrlFor("/workout/" + workoutId + "/performance_graph?" + queryString), {
+                            cookie: clientVariables.cookie
+                        })];
+                case 1:
+                    workoutPerformanceGraphRes = _a.sent();
+                    return [2, workoutPerformanceGraphRes.data];
+            }
+        });
+    });
+}
 exports.peloton = {
     authenticate: authenticate,
     me: me,
@@ -195,6 +214,7 @@ exports.peloton = {
     followers: followers,
     following: following,
     workouts: workouts,
-    workout: workout
+    workout: workout,
+    workoutPerformanceGraph: workoutPerformanceGraph
 };
 //# sourceMappingURL=index.js.map

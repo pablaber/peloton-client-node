@@ -5,9 +5,17 @@ import {
   FollowerFollowingResponse,
   MeResponse,
   UserResponse,
-  WorkoutsResponse,
+  WorkoutPerformanceGraphResponse,
   WorkoutResponse,
-} from './peloton-response-interfaces';
+  WorkoutsResponse,
+} from './interfaces/responses';
+import {
+  AuthenticateOptions,
+  FollowerFollowingOptions,
+  WorkoutOptions,
+  WorkoutPerformanceGraphOptions,
+  WorkoutsOptions,
+} from './interfaces/options';
 
 /**
  * The client variables which are stored to maintain a "session" when making requests.
@@ -48,11 +56,6 @@ function _verifyIsLoggedIn() {
   if (!clientVariables.loggedIn) {
     throw new Error('Must authenticate before making API call.');
   }
-}
-
-interface AuthenticateOptions {
-  username: string
-  password: string
 }
 
 /**
@@ -100,12 +103,6 @@ async function user(options: UserOptions = {}): Promise<UserResponse | MeRespons
   return userRes.data;
 }
 
-interface FollowerFollowingOptions {
-  userId?: string,
-  limit?: number,
-  page?: number
-}
-
 /**
  * Returns a list of users who are followed by the specified userId (or authenticated userId if none
  * specified)
@@ -141,13 +138,6 @@ async function following(options: FollowerFollowingOptions): Promise<FollowerFol
   return followingRes.data;
 }
 
-interface WorkoutsOptions {
-  userId?: string,
-  limit?: number,
-  page?: number,
-  joins?: string,
-}
-
 /**
  * Fetch the workouts for the currently authenticated user, or a userId specified.
  * @param {WorkoutOptions} options - the options for fetching the workouts
@@ -167,10 +157,6 @@ async function workouts(options: WorkoutsOptions = {}): Promise<WorkoutsResponse
   return workoutsRes.data;
 }
 
-interface WorkoutOptions {
-  workoutId: string,
-}
-
 /**
  * Fetch information from a specific workout
  * @param {WorkoutOptions} options - request options
@@ -185,6 +171,23 @@ async function workout(options: WorkoutOptions): Promise<WorkoutResponse> {
   return workoutRes.data;
 }
 
+/**
+ * Fetch performance graph information from a specific workout
+ * @param {WorkoutPerformanceGraphOptions} options - request options
+ * @return {Promise<WorkoutPerformanceGraphResponse>} the performance graph data
+ */
+async function workoutPerformanceGraph(options: WorkoutPerformanceGraphOptions): Promise<WorkoutPerformanceGraphResponse> {
+  const { workoutId } = options;
+  const every_n = options.everyN || 5;
+
+  const queryString = querystring.stringify({ every_n });
+  const workoutPerformanceGraphRes = await request.get(_pelotonApiUrlFor(`/workout/${workoutId}/performance_graph?${queryString}`), {
+    cookie: clientVariables.cookie,
+  });
+
+  return workoutPerformanceGraphRes.data;
+}
+
 export const peloton = {
   authenticate,
   me,
@@ -193,4 +196,5 @@ export const peloton = {
   following,
   workouts,
   workout,
+  workoutPerformanceGraph,
 };

@@ -35,6 +35,7 @@ async function example() {
 - [`peloton.following(options)`](#pelotonfollowingoptions) - the get users following of a specified user
 - [`peloton.workouts(options)`](#pelotonworkoutsoptions) - get workouts of authetnicated user
 - [`peloton.workout(options)`](#pelotonworkoutoptions) - get details of a specific workout
+- [`peloton.workoutPerformanceGraph(options)`](#pelotonworkoutperformancegraphoptions) - get the data used to build a performance graph of a specific workout
 
 ### `peloton.authenticate(options)`
 
@@ -147,11 +148,29 @@ Get the details of a specified workout
 
 #### Arguments
 - `options` - options object
-  - `workoutId` - the ID of the workout to retrieve
+  - `workoutId` - the ID of the workout to retrieve (**required**)
   
 #### Usage
 ```js
 const workoutRes = await peloton.workout({ workoutId: 'some-workout-id' });
+```
+
+### `peloton.workoutPerformanceGraph(options)`
+
+#### Description
+Get the data used to build a performance graph for a specific workout.
+
+#### Arguments
+- `options` - options object
+  - `workoutId` - the ID of the workout to retrieve the graph data for (**required**)
+  - `everyN` - an integer value defining the granularity of data received, in seconds (default: `5`)
+  
+#### Usage
+```js
+const workoutPerformanceGraphRes = await peloton.workoutPerformanceGraph({ 
+  workoutId: 'some-workout-id',
+  everyN: 30,
+});
 ```
 
 ## References

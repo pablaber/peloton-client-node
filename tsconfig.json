@@ -4,7 +4,6 @@
     "noImplicitAny": true,
     "removeComments": true,
     "sourceMap": true,
-    "watch": true,
     "outDir": "dist",
     "declaration": true,
     "lib": [
