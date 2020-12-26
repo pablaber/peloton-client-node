@@ -4,6 +4,7 @@ import request from './request';
 import {
   FollowerFollowingResponse,
   MeResponse,
+  RideDetailsResponse,
   RideResponse,
   UserResponse,
   WorkoutPerformanceGraphResponse,
@@ -13,6 +14,7 @@ import {
 import {
   AuthenticateOptions,
   FollowerFollowingOptions,
+  RideDetailsOptions,
   RideOptions,
   WorkoutOptions,
   WorkoutPerformanceGraphOptions,
@@ -209,6 +211,21 @@ async function ride(options: RideOptions): Promise<RideResponse> {
   return rideRes.data;
 }
 
+/**
+ * Get the ride details of a specified ride id
+ * @param {RideDetailsOptions} options - request options
+ * @return {Promise<RideDetailsResponse>} the details of the specified ride
+ */
+async function rideDetails(options: RideDetailsOptions): Promise<RideDetailsResponse> {
+  _verifyIsLoggedIn();
+  const { rideId } = options;
+
+  const rideRes = await request.get(_pelotonApiUrlFor(`/ride/${rideId}/details`), {
+    cookie: clientVariables.cookie,
+  });
+  return rideRes.data;
+}
+
 export const peloton = {
   authenticate,
   me,
@@ -219,4 +236,5 @@ export const peloton = {
   workout,
   workoutPerformanceGraph,
   ride,
+  rideDetails,
 };

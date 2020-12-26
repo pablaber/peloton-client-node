@@ -13,6 +13,10 @@ export interface RideOptions {
   rideId: string,
 }
 
+export interface RideDetailsOptions {
+  rideId: string,
+}
+
 export interface WorkoutOptions {
   workoutId: string,
 }

@@ -1,4 +1,4 @@
-import { AchievementTemplate, AverageSummary, ContractAgreement, FtpInfo, JoinTokens, Metric, PairedDevice, QuickHits, Relationship, Ride, RideType, Segment, Streaks, Summary, SummaryObject, TargetPerformanceMetrics, UserSmall, Workout, WorkoutCountObject } from './models';
+import { AchievementTemplate, Averages, AverageSummary, ContractAgreement, DefaultAlbumImages, DisabledLeaderboardFilters, Events, FtpInfo, JoinTokens, Metric, PairedDevice, Playlist, QuickHits, Relationship, Ride, RideSegments, RideType, Segment, Streaks, Summary, SummaryObject, TargetPerformanceMetrics, UserSmall, Workout, WorkoutCountObject } from './models';
 export interface FollowerFollowingResponse {
     data: UserSmall[];
     limit: number;
@@ -73,6 +73,20 @@ export interface MeResponse {
     v1_referrals_made: number;
     weight: number;
     workout_counts: WorkoutCountObject[];
+}
+export interface RideDetailsResponse {
+    ride: Ride;
+    playlist: Playlist;
+    averages: Averages;
+    segments: RideSegments;
+    default_album_images: DefaultAlbumImages;
+    excluded_platforms: string[];
+    is_ftp_test: boolean;
+    disabled_leaderboard_filters: DisabledLeaderboardFilters;
+    sampled_top_tags: null | string[];
+    instructor_cues: any[];
+    target_class_metrics: any;
+    events: Events;
 }
 export interface RideResponse {
     captions: string[];

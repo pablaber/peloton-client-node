@@ -229,6 +229,24 @@ function ride(options) {
         });
     });
 }
+function rideDetails(options) {
+    return __awaiter(this, void 0, void 0, function () {
+        var rideId, rideRes;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _verifyIsLoggedIn();
+                    rideId = options.rideId;
+                    return [4, request_1["default"].get(_pelotonApiUrlFor("/ride/" + rideId + "/details"), {
+                            cookie: clientVariables.cookie
+                        })];
+                case 1:
+                    rideRes = _a.sent();
+                    return [2, rideRes.data];
+            }
+        });
+    });
+}
 exports.peloton = {
     authenticate: authenticate,
     me: me,
@@ -238,6 +256,7 @@ exports.peloton = {
     workouts: workouts,
     workout: workout,
     workoutPerformanceGraph: workoutPerformanceGraph,
-    ride: ride
+    ride: ride,
+    rideDetails: rideDetails
 };
 //# sourceMappingURL=index.js.map
