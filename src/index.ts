@@ -4,6 +4,7 @@ import request from './request';
 import {
   FollowerFollowingResponse,
   MeResponse,
+  RideResponse,
   UserResponse,
   WorkoutPerformanceGraphResponse,
   WorkoutResponse,
@@ -12,6 +13,7 @@ import {
 import {
   AuthenticateOptions,
   FollowerFollowingOptions,
+  RideOptions,
   WorkoutOptions,
   WorkoutPerformanceGraphOptions,
   WorkoutsOptions,
@@ -111,6 +113,7 @@ async function user(options: UserOptions = {}): Promise<UserResponse | MeRespons
  * userId
  */
 async function followers(options: FollowerFollowingOptions): Promise<FollowerFollowingResponse> {
+  _verifyIsLoggedIn();
   const userId = options.userId || clientVariables.userId;
   const limit = options.limit || 10;
   const page = options.page || 0;
@@ -128,6 +131,7 @@ async function followers(options: FollowerFollowingOptions): Promise<FollowerFol
  * @return {Promise<FollowerFollowingResponse>} the list of those following the specified userId
  */
 async function following(options: FollowerFollowingOptions): Promise<FollowerFollowingResponse> {
+  _verifyIsLoggedIn();
   const userId = options.userId || clientVariables.userId;
   const limit = options.limit || 10;
   const page = options.page || 0;
@@ -163,6 +167,7 @@ async function workouts(options: WorkoutsOptions = {}): Promise<WorkoutsResponse
  * @return {Promise<WorkoutResponse>} the specified workout details
  */
 async function workout(options: WorkoutOptions): Promise<WorkoutResponse> {
+  _verifyIsLoggedIn();
   const { workoutId } = options;
 
   const workoutRes = await request.get(_pelotonApiUrlFor(`/workout/${workoutId}`), {
@@ -177,6 +182,7 @@ async function workout(options: WorkoutOptions): Promise<WorkoutResponse> {
  * @return {Promise<WorkoutPerformanceGraphResponse>} the performance graph data
  */
 async function workoutPerformanceGraph(options: WorkoutPerformanceGraphOptions): Promise<WorkoutPerformanceGraphResponse> {
+  _verifyIsLoggedIn();
   const { workoutId } = options;
   const every_n = options.everyN || 5;
 
@@ -188,6 +194,21 @@ async function workoutPerformanceGraph(options: WorkoutPerformanceGraphOptions):
   return workoutPerformanceGraphRes.data;
 }
 
+/**
+ * Fetch information about a specific ride.
+ * @param {RideOptions} options - request optoins
+ * @return {Promise<RideResponse} information about the specified ride 
+ */
+async function ride(options: RideOptions): Promise<RideResponse> {
+  _verifyIsLoggedIn();
+  const { rideId } = options;
+
+  const rideRes = await request.get(_pelotonApiUrlFor(`/ride/${rideId}`), {
+    cookie: clientVariables.cookie,
+  });
+  return rideRes.data;
+}
+
 export const peloton = {
   authenticate,
   me,
@@ -197,4 +218,5 @@ export const peloton = {
   workouts,
   workout,
   workoutPerformanceGraph,
+  ride,
 };

@@ -114,6 +114,7 @@ function followers(options) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
+                    _verifyIsLoggedIn();
                     userId = options.userId || clientVariables.userId;
                     limit = options.limit || 10;
                     page = options.page || 0;
@@ -134,6 +135,7 @@ function following(options) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
+                    _verifyIsLoggedIn();
                     userId = options.userId || clientVariables.userId;
                     limit = options.limit || 10;
                     page = options.page || 0;
@@ -177,6 +179,7 @@ function workout(options) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
+                    _verifyIsLoggedIn();
                     workoutId = options.workoutId;
                     return [4, request_1["default"].get(_pelotonApiUrlFor("/workout/" + workoutId), {
                             cookie: clientVariables.cookie
@@ -194,6 +197,7 @@ function workoutPerformanceGraph(options) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
+                    _verifyIsLoggedIn();
                     workoutId = options.workoutId;
                     every_n = options.everyN || 5;
                     queryString = querystring.stringify({ every_n: every_n });
@@ -207,6 +211,24 @@ function workoutPerformanceGraph(options) {
         });
     });
 }
+function ride(options) {
+    return __awaiter(this, void 0, void 0, function () {
+        var rideId, rideRes;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _verifyIsLoggedIn();
+                    rideId = options.rideId;
+                    return [4, request_1["default"].get(_pelotonApiUrlFor("/ride/" + rideId), {
+                            cookie: clientVariables.cookie
+                        })];
+                case 1:
+                    rideRes = _a.sent();
+                    return [2, rideRes.data];
+            }
+        });
+    });
+}
 exports.peloton = {
     authenticate: authenticate,
     me: me,
@@ -215,6 +237,7 @@ exports.peloton = {
     following: following,
     workouts: workouts,
     workout: workout,
-    workoutPerformanceGraph: workoutPerformanceGraph
+    workoutPerformanceGraph: workoutPerformanceGraph,
+    ride: ride
 };
 //# sourceMappingURL=index.js.map

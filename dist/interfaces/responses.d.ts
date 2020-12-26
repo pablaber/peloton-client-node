@@ -1,4 +1,4 @@
-import { AchievementTemplate, AverageSummary, ContractAgreement, FtpInfo, Metric, PairedDevice, QuickHits, Relationship, Ride, Segment, Streaks, Summary, SummaryObject, TargetPerformanceMetrics, UserSmall, Workout, WorkoutCountObject } from './models';
+import { AchievementTemplate, AverageSummary, ContractAgreement, FtpInfo, JoinTokens, Metric, PairedDevice, QuickHits, Relationship, Ride, RideType, Segment, Streaks, Summary, SummaryObject, TargetPerformanceMetrics, UserSmall, Workout, WorkoutCountObject } from './models';
 export interface FollowerFollowingResponse {
     data: UserSmall[];
     limit: number;
@@ -73,6 +73,67 @@ export interface MeResponse {
     v1_referrals_made: number;
     weight: number;
     workout_counts: WorkoutCountObject[];
+}
+export interface RideResponse {
+    captions: string[];
+    class_type_ids: string[];
+    content_format: string;
+    content_provider: string;
+    description: string;
+    difficulty_estimate: number;
+    difficulty_level?: any;
+    difficulty_rating_avg: number;
+    difficulty_rating_count: number;
+    duration: number;
+    equipment_ids: string[];
+    equipment_tags: string[];
+    extra_images: string[];
+    fitness_discipline_display_name: string;
+    fitness_discipline: string;
+    has_closed_captions: boolean;
+    has_free_mode: boolean;
+    has_pedaling_metrics: boolean;
+    home_peloton_id: string;
+    id: string;
+    image_url: string;
+    instructor_id: string;
+    is_archived: boolean;
+    is_closed_caption_shown: boolean;
+    is_explicit: boolean;
+    is_favorite: boolean;
+    is_live_in_studio_only: boolean;
+    join_tokens: JoinTokens;
+    language: string;
+    length: number;
+    live_stream_id: string;
+    live_stream_url: null | string;
+    location: string;
+    metrics: string[];
+    origin_locale: string;
+    original_air_time: string;
+    overall_estimate: number;
+    overall_rating_avg: string;
+    overall_rating_count: string;
+    pedaling_duration: string;
+    pedaling_end_offset: string;
+    pedaling_start_offset: string;
+    rating: string;
+    ride_type_id: string;
+    ride_type_ids: string[];
+    ride_types: RideType[];
+    sample_vod_stream_url: null | string;
+    scheduled_start_time: number;
+    series_id: string;
+    sold_out: boolean;
+    studio_peloton_id: string;
+    title: string;
+    total_following_workouts: number;
+    total_in_progress_workouts: number;
+    total_ratings: number;
+    total_user_workouts: number;
+    total_workouts: number;
+    vod_stream_id: string;
+    vod_stream_url: string;
 }
 export interface UserResponse {
     authed_user_follows: boolean;

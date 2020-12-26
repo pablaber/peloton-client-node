@@ -9,6 +9,10 @@ export interface FollowerFollowingOptions {
   page?: number
 }
 
+export interface RideOptions {
+  rideId: string,
+}
+
 export interface WorkoutOptions {
   workoutId: string,
 }

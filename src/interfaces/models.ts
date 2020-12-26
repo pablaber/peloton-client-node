@@ -116,6 +116,15 @@ export interface Ride {
   vod_stream_url?: string,
 }
 
+export interface RideType {
+  id: string,
+  name: string,
+  display_name: string,
+  fitness_discipline: string,
+  is_active: boolean,
+  list_order: number,
+}
+
 export interface Workout {
   created_at: number
   device_type: string

@@ -7,6 +7,9 @@ export interface FollowerFollowingOptions {
     limit?: number;
     page?: number;
 }
+export interface RideOptions {
+    rideId: string;
+}
 export interface WorkoutOptions {
     workoutId: string;
 }
