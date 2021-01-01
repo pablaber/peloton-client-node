@@ -46,8 +46,8 @@ Authenticates the session. Must be called before any other methods are called.
 
 #### Arguments
 - `options` - options object
-  - `username` - the username or email of the authenticating Peloton account (**required**)
-  - `password` - the password of the authenticating Peloton account (**required**)
+- `username` - the username or email of the authenticating Peloton account (**required**)
+- `password` - the password of the authenticating Peloton account (**required**)
 
 #### Usage
 ```js
@@ -61,7 +61,7 @@ await peloton.authenticate({
 
 #### Description
 Gets the authenticated users information. 
-_Must have called `peloton.authenticate` before this method can be used._
+Must have called `peloton.authenticate` before this method can be used._
 
 #### Usage
 ```js
@@ -75,7 +75,7 @@ Gets the details of the specified user or yourself if none is specified.
 
 #### Arguments
 - `options` - options object
-  - `userId` - the ID of the user to fetch information of (default: authenticated userId)
+- `userId` - the ID of the user to fetch information of (default: authenticated userId)
 
 #### Usage
 ```js
@@ -89,9 +89,9 @@ Get the followers of the authenticated user or a specified user.
 
 #### Arguments
 - `options` - options object
-  - `userId` - specify the user to retrieve the followers of (default: authenticated userId)
-  - `limit` - limit the number of workouts returned (default: `10`)
-  - `page` - the page of the results to fetch (default: `0`)
+- `userId` - specify the user to retrieve the followers of (default: authenticated userId)
+- `limit` - limit the number of workouts returned (default: `10`)
+- `page` - the page of the results to fetch (default: `0`)
 
 #### Usage
 ```js
@@ -109,9 +109,9 @@ Get the users following the authenticated user or a specified user.
 
 #### Arguments
 - `options` - options object
-  - `userId` - specify the user to retrieve those who are following (default: authenticated userId)
-  - `limit` - limit the number of workouts returned (default: `10`)
-  - `page` - the page of the results to fetch (default: `0`)
+- `userId` - specify the user to retrieve those who are following (default: authenticated userId)
+- `limit` - limit the number of workouts returned (default: `10`)
+- `page` - the page of the results to fetch (default: `0`)
 
 #### Usage
 ```js
@@ -129,10 +129,10 @@ Gets the workouts of the authenticated user or a specified user.
 
 #### Arguments
 - `options` - options object
-  - `userId` - specify the user to retrieve the workouts of (default: authenticated userId)
-  - `limit` - limit the number of workouts returned (default: `10`)
-  - `page` - the page of the results to fetch (default: `0`)
-  - `joins` - _UNSURE:_ some sort of join key. I believe it may expand the keys provided (default: `'ride'`)
+- `userId` - specify the user to retrieve the workouts of (default: authenticated userId)
+- `limit` - limit the number of workouts returned (default: `10`)
+- `page` - the page of the results to fetch (default: `0`)
+- `joins` - _UNSURE:_ some sort of join key. I believe it may expand the keys provided (default: `'ride'`)
 
 #### Usage
 ```js
@@ -150,7 +150,7 @@ Get the details of a specified workout
 
 #### Arguments
 - `options` - options object
-  - `workoutId` - the ID of the workout to retrieve (**required**)
+- `workoutId` - the ID of the workout to retrieve (**required**)
   
 #### Usage
 ```js
@@ -164,8 +164,8 @@ Get the data used to build a performance graph for a specific workout.
 
 #### Arguments
 - `options` - options object
-  - `workoutId` - the ID of the workout to retrieve the graph data for (**required**)
-  - `everyN` - an integer value defining the granularity of data received, in seconds (default: `5`)
+- `workoutId` - the ID of the workout to retrieve the graph data for (**required**)
+- `everyN` - an integer value defining the granularity of data received, in seconds (default: `5`)
   
 #### Usage
 ```js
@@ -178,11 +178,11 @@ const workoutPerformanceGraphRes = await peloton.workoutPerformanceGraph({
 ### `peloton.ride(options)`
 
 #### Description
-Get inforamtion about a specific ride.
+Get information about a specific ride.
 
 #### Arguments
 - `options` - options object
-  - `rideId` - the ID of the ride to retrieve the information for (**required**)
+- `rideId` - the ID of the ride to retrieve the information for (**required**)
   
 #### Usage
 ```js
@@ -196,7 +196,7 @@ Get details about a specific ride.
 
 #### Arguments
 - `options` - options object
-  - `rideId` - the ID of the ride to retrieve the information for (**required**)
+- `rideId` - the ID of the ride to retrieve the information for (**required**)
   
 #### Usage
 ```js
@@ -205,4 +205,4 @@ const rideDetailsRes = await peloton.rideDetails({ rideId: 'some-ride-id' });
 
 ## References
 
-This was inspred from [this](https://github.com/geudrik/peloton-client-library) python library as well as the [API Docs](https://github.com/geudrik/peloton-client-library/blob/master/API_DOCS.md) written there.
+This was inspired by [this](https://github.com/geudrik/peloton-client-library) python library as well as the [API Docs](https://github.com/geudrik/peloton-client-library/blob/master/API_DOCS.md) written there.
