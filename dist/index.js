@@ -108,6 +108,25 @@ function user(options) {
         });
     });
 }
+function instructor(options) {
+    if (options === void 0) { options = {}; }
+    return __awaiter(this, void 0, void 0, function () {
+        var instructorId, instructorRes;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _verifyIsLoggedIn();
+                    instructorId = options.instructorId;
+                    return [4, request_1["default"].get(_pelotonApiUrlFor("/instructor/" + instructorId), {
+                            cookie: clientVariables.cookie
+                        })];
+                case 1:
+                    instructorRes = _a.sent();
+                    return [2, instructorRes.data];
+            }
+        });
+    });
+}
 function followers(options) {
     return __awaiter(this, void 0, void 0, function () {
         var userId, limit, page, workoutQueryParams, followersRes;
@@ -251,6 +270,7 @@ exports.peloton = {
     authenticate: authenticate,
     me: me,
     user: user,
+    instructor: instructor,
     followers: followers,
     following: following,
     workouts: workouts,

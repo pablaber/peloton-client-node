@@ -38,6 +38,7 @@ async function example() {
 - [`peloton.workoutPerformanceGraph(options)`](#pelotonworkoutperformancegraphoptions) - get the data used to build a performance graph of a specific workout
 - [`peloton.ride(options)`](#pelotonrideoptions) - get information about a specific ride
 - [`peloton.rideDetails(options)`](#pelotonridedetailsoptions) - get details about a specific ride
+- [`peloton.instructor(options)`](#pelotoninstructoroptions) - get information about an instructor
 
 ### `peloton.authenticate(options)`
 
@@ -178,7 +179,7 @@ const workoutPerformanceGraphRes = await peloton.workoutPerformanceGraph({
 ### `peloton.ride(options)`
 
 #### Description
-Get inforamtion about a specific ride.
+Get information about a specific ride.
 
 #### Arguments
 - `options` - options object
@@ -201,6 +202,20 @@ Get details about a specific ride.
 #### Usage
 ```js
 const rideDetailsRes = await peloton.rideDetails({ rideId: 'some-ride-id' });
+```
+
+### `peloton.instructor(options)`
+
+#### Description
+Get details about a specific instructor.
+
+#### Arguments
+- `options` - options object
+  - `instructorId` - the ID of the instructor to retrieve the information for (**required**)
+  
+#### Usage
+```js
+const instructorRes = await peloton.instructor({ instructorId: 'some-instructor-id' });
 ```
 
 ## References

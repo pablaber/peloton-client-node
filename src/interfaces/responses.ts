@@ -7,6 +7,7 @@ import {
   DisabledLeaderboardFilters,
   Events,
   FtpInfo,
+  Instructor,
   JoinTokens,
   Metric,
   PairedDevice,
@@ -24,6 +25,7 @@ import {
   UserSmall,
   Workout,
   WorkoutCountObject,
+  WorkoutShareImage
 } from './models';
 
 export interface FollowerFollowingResponse {
@@ -199,6 +201,46 @@ export interface UserResponse {
   total_workouts: number,
   username: string,
   workout_counts: WorkoutCountObject[],
+}
+
+export interface InstructorResponse {
+  id: string,
+  bio: string,
+  short_bio: string,
+  coach_type: string,
+  is_filterable: boolean,
+  is_instructor_group: boolean,
+  is_visible: boolean,
+  list_order: number,
+  featured_profile: boolean,
+  film_link: string,
+  facebook_fan_page: string,
+  music_bio: string,
+  spotify_playlist_uri: string,
+  background: string,
+  ordered_q_and_as: string[][],
+  instagram_profile: string,
+  strava_profile: string,
+  twitter_profile: string,
+  quote: string,
+  username: string,
+  name: string,
+  first_name: string,
+  last_name: string,
+  user_id: string,
+  life_style_image_url: string,
+  bike_instructor_list_display_image_url: null | string,
+  web_instructor_list_display_image_url: null | string
+  ios_instructor_list_display_image_url: null | string
+  about_image_url: null | string
+  image_url: null | string
+  jumbotron_url: null | string
+  jumbotron_url_dark: null | string
+  jumbotron_url_ios: null | string
+  web_instructor_list_gif_image_url: null | string
+  instructor_hero_image_url: null | string
+  workout_share_images: WorkoutShareImage[],
+  fitness_disciplines: string[],
 }
 
 export interface WorkoutResponse {

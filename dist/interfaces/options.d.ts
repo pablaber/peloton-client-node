@@ -2,6 +2,12 @@ export interface AuthenticateOptions {
     username: string;
     password: string;
 }
+export interface UserOptions {
+    userId?: string;
+}
+export interface InstructorOptions {
+    instructorId?: string;
+}
 export interface FollowerFollowingOptions {
     userId?: string;
     limit?: number;

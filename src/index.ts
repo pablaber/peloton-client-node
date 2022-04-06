@@ -3,6 +3,7 @@ import querystring = require('querystring');
 import request from './request';
 import {
   FollowerFollowingResponse,
+  InstructorResponse,
   MeResponse,
   RideDetailsResponse,
   RideResponse,
@@ -14,8 +15,10 @@ import {
 import {
   AuthenticateOptions,
   FollowerFollowingOptions,
+  InstructorOptions,
   RideDetailsOptions,
   RideOptions,
+  UserOptions,
   WorkoutOptions,
   WorkoutPerformanceGraphOptions,
   WorkoutsOptions,
@@ -88,10 +91,6 @@ async function me(): Promise<MeResponse> {
   return meRes.data;
 }
 
-interface UserOptions {
-  userId?: string
-}
-
 /**
  * Get the details of a user specified by a given ID
  * @param {UserOptions} options - user options
@@ -106,6 +105,23 @@ async function user(options: UserOptions = {}): Promise<UserResponse | MeRespons
   });
   return userRes.data;
 }
+
+/**
+ * Get the details of an instructor specified by a given ID
+ * @param {InstructorOptions} options - instructor options
+ * @return {Promise<InstructorResponse>} the limited instructor information if an instructorId is
+ * specified
+ */
+ async function instructor(options: InstructorOptions = {}): Promise<InstructorResponse> {
+  _verifyIsLoggedIn();
+  const { instructorId } = options;
+
+  const instructorRes = await request.get(_pelotonApiUrlFor(`/instructor/${instructorId}`), {
+    cookie: clientVariables.cookie,
+  });
+  return instructorRes.data;
+}
+
 
 /**
  * Returns a list of users who are followed by the specified userId (or authenticated userId if none
@@ -230,6 +246,7 @@ export const peloton = {
   authenticate,
   me,
   user,
+  instructor,
   followers,
   following,
   workouts,

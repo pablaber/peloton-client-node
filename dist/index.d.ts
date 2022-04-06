@@ -1,11 +1,9 @@
-import { FollowerFollowingResponse, MeResponse, RideDetailsResponse, RideResponse, UserResponse, WorkoutPerformanceGraphResponse, WorkoutResponse, WorkoutsResponse } from './interfaces/responses';
-import { AuthenticateOptions, FollowerFollowingOptions, RideDetailsOptions, RideOptions, WorkoutOptions, WorkoutPerformanceGraphOptions, WorkoutsOptions } from './interfaces/options';
+import { FollowerFollowingResponse, InstructorResponse, MeResponse, RideDetailsResponse, RideResponse, UserResponse, WorkoutPerformanceGraphResponse, WorkoutResponse, WorkoutsResponse } from './interfaces/responses';
+import { AuthenticateOptions, FollowerFollowingOptions, InstructorOptions, RideDetailsOptions, RideOptions, UserOptions, WorkoutOptions, WorkoutPerformanceGraphOptions, WorkoutsOptions } from './interfaces/options';
 declare function authenticate(options: AuthenticateOptions): Promise<void>;
 declare function me(): Promise<MeResponse>;
-interface UserOptions {
-    userId?: string;
-}
 declare function user(options?: UserOptions): Promise<UserResponse | MeResponse>;
+declare function instructor(options?: InstructorOptions): Promise<InstructorResponse>;
 declare function followers(options: FollowerFollowingOptions): Promise<FollowerFollowingResponse>;
 declare function following(options: FollowerFollowingOptions): Promise<FollowerFollowingResponse>;
 declare function workouts(options?: WorkoutsOptions): Promise<WorkoutsResponse>;
@@ -17,6 +15,7 @@ export declare const peloton: {
     authenticate: typeof authenticate;
     me: typeof me;
     user: typeof user;
+    instructor: typeof instructor;
     followers: typeof followers;
     following: typeof following;
     workouts: typeof workouts;
